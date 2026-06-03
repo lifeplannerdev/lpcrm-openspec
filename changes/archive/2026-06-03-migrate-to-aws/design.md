@@ -10,7 +10,7 @@ The current application (LifePlanner CRM) runs on a non-AWS hosting provider wit
 - Migrate PostgreSQL from Neon to a local Postgres instance on the EC2 server.
 - Implement automated nightly database backups to Amazon S3.
 - Implement background workers using Celery and Redis managed by `systemd`.
-- Migrate React/Vite frontend to AWS Amplify.
+- Migrate React/Vite frontend to Vercel.
 - Achieve an estimated total AWS bill of ~$30/month.
 
 **Non-Goals:**
@@ -25,7 +25,7 @@ The current application (LifePlanner CRM) runs on a non-AWS hosting provider wit
 - **Database Backups:** Nightly `pg_dump` uploaded to Amazon S3. *Rationale:* Ensures we never lose data if the EC2 instance fails, utilizing S3's incredibly cheap storage (~$0.05/mo for backups).
 - **File Storage:** Amazon S3. *Rationale:* S3 is the industry standard for scalable object storage. It replaces Cloudify for pennies a month.
 - **Background Jobs:** Celery and Redis. *Rationale:* Runs natively on the EC2 instance, managed by `systemd`.
-- **Hosting the Frontend:** AWS Amplify. *Rationale:* Easiest integration for React/Vite, offering built-in CI/CD, SSL, and CDN.
+- **Hosting the Frontend:** Vercel. *Rationale:* Easiest integration for React/Vite, offering built-in CI/CD, SSL, CDN, and industry-leading developer experience with preview deployments.
 
 ## Risks / Trade-offs
 

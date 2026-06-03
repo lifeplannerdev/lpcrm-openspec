@@ -9,7 +9,7 @@ We are migrating our entire architecture to AWS to build a unified, single-platf
 - Implementation of a nightly automated database backup system (`pg_dump` -> AWS S3).
 - Setup of local Redis and Celery (Worker + Beat) on the EC2 instance for background cron jobs.
 - Migration of our file storage from Cloudify to Amazon S3.
-- Migration of the frontend (React/Vite) to AWS Amplify.
+- Migration of the frontend (React/Vite) to Vercel.
 - Separation of backend and frontend into independent deployment pipelines (`lpcrmaws-backend` and `lpcrmaws-frontend`).
 
 ## Capabilities
@@ -20,7 +20,7 @@ We are migrating our entire architecture to AWS to build a unified, single-platf
 - `cron-jobs-system`: Background processing and scheduling system using Celery and Redis.
 - `database-migration`: Migration strategy from Neon to local EC2 PostgreSQL, and automated S3 backups.
 - `file-storage-migration`: Migration of documents and media from Cloudify to Amazon S3.
-- `ci-cd-pipeline`: Automated deployment pipelines for bare-metal backend updates (SSH) and frontend (Amplify).
+- `ci-cd-pipeline`: Automated deployment pipelines for bare-metal backend updates (SSH) and frontend (Vercel).
 
 ### Modified Capabilities
 
