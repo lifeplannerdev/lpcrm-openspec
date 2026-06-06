@@ -1,4 +1,7 @@
-## MODIFIED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: Global Screen Wrapper
 The system SHALL provide a `ScreenWrapper` component to standardize screen layouts.
@@ -10,7 +13,6 @@ The system SHALL provide a `ScreenWrapper` component to standardize screen layou
 
 <!-- Synced from revolutionary-ui-design -->
 
-## ADDED Requirements
 
 ### Requirement: Glassmorphic Component Library
 The system SHALL provide a set of premium UI components that utilize frosted glass blurs (`expo-blur`) and vibrant gradients (`expo-linear-gradient`).

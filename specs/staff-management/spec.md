@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: Staff Soft Deletion Only
 The system SHALL NOT permit the hard deletion of staff records under any circumstances from the user interface. Staff records can only be soft-deleted by toggling their `is_active` status to false.
@@ -29,7 +32,6 @@ The Staff Permission Assign Screen SHALL list the new Asset Management permissio
 - **WHEN** an admin edits the permissions of an IT staff member
 - **THEN** they can select the "Manage Assets" permission flag, saving the setting successfully.
 
-## MODIFIED Requirements
 
 ### Requirement: Tabbed Status Filtering for Staff
 The system SHALL present staff members in a tabbed UI to clearly separate them by status (All Staff, Active, Inactive, On Leave), ensuring soft-deleted (inactive) users remain accessible for data integrity.

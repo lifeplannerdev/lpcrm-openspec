@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: Database Query Optimization
 The backend SHALL optimize all list and detail API endpoints by eager-loading related data using ORM features like `select_related` and `prefetch_related` to prevent N+1 query problems.

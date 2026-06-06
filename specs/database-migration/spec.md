@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: Database Parity
 The new local EC2 PostgreSQL database SHALL contain all schemas, tables, and data exactly as they exist in the current Neon database post-migration.

@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: Automated Backend Deployment
 The CI/CD pipeline SHALL automatically deploy the Python backend upon merging code to the main branch.

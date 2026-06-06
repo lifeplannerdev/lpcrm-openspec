@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: Multi-Parameter Report Filtering
 The system SHALL support filtering reports simultaneously by Employee, Date, Status, and Search Keyword on the backend list APIs.

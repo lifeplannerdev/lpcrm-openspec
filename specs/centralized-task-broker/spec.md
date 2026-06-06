@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: Centralized Task Registration
 The system SHALL enforce a standardized convention where all asynchronous tasks and scheduled automations are defined in `tasks.py` modules within their respective Django apps.

@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: Missing Action Warning
 The system SHALL visually flag leads in active states (ENQUIRY, CONTACTED) that do not have a future scheduled follow-up.

@@ -1,33 +1,26 @@
-# academic-management Specification
-
 ## Purpose
-TBD - created by archiving change crm-production-enhancements. Update Purpose after archive.
+Defines the capabilities and requirements for this domain.
+
 ## Requirements
-### Requirement: Hierarchical Academic Batches
-The system SHALL structure academic batches based on an Academic Year -> General/Grade hierarchy.
 
-#### Scenario: Viewing batches
-- **WHEN** user views the academic section
-- **THEN** system organizes batches under their respective academic years
+### Requirement: Fee-Aware Academic Enrollment Views
+The system MUST show linked fee-plan status in academic management views so staff can see whether a student is fully set up for the active academic batch.
 
-### Requirement: Academic Date Tracking
-The system SHALL track Admission Date, Model Exams Date, and Final Exams Date for student batches.
+#### Scenario: Batch roster shows fee state
+- **WHEN** an authorized user opens a batch or student roster in academic management
+- **THEN** the system SHALL display whether each student has no fee plan, a pending fee setup, an active fee plan, or an overdue fee account
 
-#### Scenario: Scheduling exams
-- **WHEN** admin inputs model and final exam dates for a batch
-- **THEN** system stores and displays these dates correctly within the academic view
+#### Scenario: Academic lifecycle reflects fee linkage
+- **WHEN** a student is moved between batches or enrollment states
+- **THEN** the system SHALL preserve the linked fee account and keep the academic record aligned with the current fee state
 
-### Requirement: Marks Achieved Tracking
-The system SHALL support tracking the "Marks Achieved" for students in their Model Exams and Final Exams.
+### Requirement: Default Fee Template Awareness
+The system MUST allow academic enrollment flows to understand the default fee template context for a batch or program when one is configured.
 
-#### Scenario: Trainer enters exam marks
-- **WHEN** a trainer inputs the model exam score for a student in a batch
-- **THEN** the system saves the `ExamResult` linking the student to the score
+#### Scenario: Batch has a default fee template
+- **WHEN** an admin configures a default fee template for an academic batch
+- **THEN** the system SHALL surface that template as the suggested fee plan during student enrollment
 
-### Requirement: Tabbed Status Filtering for Students
-The system SHALL present students in a tabbed UI to clearly separate them by status (Active, Paused, Dropped, Completed).
-
-#### Scenario: User clicks "Dropped" tab
-- **WHEN** the user switches to the "Dropped" tab on the Students page
-- **THEN** the grid only displays students whose status is Dropped
-
+#### Scenario: No batch default exists
+- **WHEN** a batch has no default fee template
+- **THEN** the system SHALL require the fee plan to be chosen explicitly from the fee template catalog during accounting setup

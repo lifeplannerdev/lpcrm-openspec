@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities for tracking, managing, and assigning physical and digital assets across companies, including hierarchical asset relationships and dynamic typing.
+
+## Requirements
 
 ### Requirement: Asset Tracking Model
 The system SHALL track physical and digital assets with details including name, type, serial number, status, company affiliation, assignment to a user, and a photo/invoice attachment.
@@ -27,3 +30,46 @@ The Asset Management page SHALL follow the premium UI guidelines, offering a dyn
 #### Scenario: Navigating the asset inventory
 - **WHEN** the user browses the asset inventory
 - **THEN** they see an engaging, responsive interface with hover effects and clear typography.
+
+### Requirement: Structured Asset Types
+The system SHALL restrict the creation and editing of assets to a predefined set of types: Mobiles, Monitors, PC, Keyboard, Mouse, Laptops, SIM.
+
+#### Scenario: Creating a New Asset
+- **WHEN** a user fills out the Add Asset form
+- **THEN** the Asset Type field is a dropdown containing only the approved predefined types
+
+### Requirement: Dynamic IMEI Labeling
+The system SHALL dynamically change the UI label for the hardware identifier field based on the selected asset type.
+
+#### Scenario: Selecting Mobile Asset Type
+- **WHEN** a user selects "Mobiles" from the Asset Type dropdown
+- **THEN** the label for the hardware identifier field changes from "Serial Number" to "IMEI Number"
+
+#### Scenario: Selecting Non-Mobile Asset Type
+- **WHEN** a user selects "Laptops" from the Asset Type dropdown
+- **THEN** the label for the hardware identifier field remains "Serial Number"
+
+### Requirement: Attach Asset to Parent Asset
+The system SHALL allow an asset (such as a SIM card) to be attached to a parent asset (such as a Mobile phone).
+
+#### Scenario: Attaching a SIM to a Mobile
+- **WHEN** a user creates or edits an asset of type "SIM" and selects a "Mobile" from the Parent Asset dropdown
+- **THEN** the SIM is saved with the Mobile as its `parent_asset`
+
+### Requirement: Inherit Assigned User from Parent
+The system SHALL enforce that any asset attached to a parent asset inherits the `assigned_to` property of its parent.
+
+#### Scenario: Syncing Assignment on Attachment
+- **WHEN** an unassigned SIM is attached to a Mobile assigned to User A
+- **THEN** the SIM's `assigned_to` field is automatically set to User A
+
+#### Scenario: Syncing Assignment on Parent Update
+- **WHEN** a Mobile with an attached SIM is reassigned from User A to User B
+- **THEN** the attached SIM's `assigned_to` field is automatically updated to User B
+
+### Requirement: Display Attached Assets
+The system SHALL display attached assets grouped under their parent asset in the UI (e.g., Staff Profile page).
+
+#### Scenario: Viewing Staff Assigned Devices
+- **WHEN** a user views a staff member's profile
+- **THEN** any attached assets (SIMs) are displayed visually indented beneath their respective parent device (Mobiles)

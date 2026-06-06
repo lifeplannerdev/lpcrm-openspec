@@ -1,4 +1,7 @@
-## ADDED Requirements
+## Purpose
+Defines the capabilities and requirements for this domain.
+
+## Requirements
 
 ### Requirement: S3 Migration Script
 The system SHALL provide a management command to download all existing files from Cloudinary and upload them to AWS S3.
