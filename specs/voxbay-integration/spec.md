@@ -1,7 +1,7 @@
 # voxbay-integration Specification
 
 ## Purpose
-TBD - created by archiving change crm-advanced-operations. Update Purpose after archive.
+Defines the integration requirements for Voxbay, specifically focusing on webhook ingestion of call logs, 1-click lead conversion, and automated follow-up queueing.
 ## Requirements
 ### Requirement: Voxbay Webhook Ingestion
 The system SHALL provide a webhook endpoint to receive call logs from Voxbay.

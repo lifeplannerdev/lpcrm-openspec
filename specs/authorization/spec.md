@@ -35,12 +35,28 @@ The frontend SHALL provide a generic wrapper component `<Can>` that conditionall
 - **WHEN** `<Can perform="leads:edit">` is rendered and the store lacks `edit` under the `leads` key
 - **THEN** the children of `<Can>` are NOT rendered
 
-### Requirement: Granular Permission Storage
-The system SHALL store individual user permissions as a flat JSON array on the User record.
+### Requirement: Hybrid Permission Storage and Payload Generation
+The system SHALL support both role-based access control via a many-to-many `db_roles` relationship to a `Role` model, and user-specific custom permissions via a `permissions` JSON field.
+The backend SHALL calculate a consolidated permission payload for a user based on their assigned DB roles and directly assigned JSON permissions, returning a structured dictionary mapping resources to allowed actions (e.g., `{"leads": ["read", "create"]}`).
 
-#### Scenario: User creation with template
-- **WHEN** a new user is created with a specific role
-- **THEN** the system populates the user's permissions array based on the role's predefined template
+#### Scenario: User performs an action restricted to specific roles
+- **WHEN** a user attempts to access an endpoint or perform an action restricted to `FULL_ACCESS_ROLES`
+- **THEN** the system MUST check if any of the user's `db_roles` intersect with `FULL_ACCESS_ROLES`
+
+#### Scenario: User activity is logged
+- **WHEN** the system logs user activity (e.g., Staff Creation, Updates)
+- **THEN** the system MUST derive the role name(s) from the `db_roles` relationship to include in the log metadata.
+
+#### Scenario: User logs in
+- **WHEN** user with valid DB roles logs in
+- **THEN** system generates a hybrid payload with access strictly defined by the union of their DB role permissions and user-specific permissions.
+
+### Requirement: Synchronous Permission Resolution
+The permissions resolution context in the frontend SHALL immediately provide valid permissions based on the authenticated user without asynchronous delay upon initial load.
+
+#### Scenario: Page Refresh on Protected Route
+- **WHEN** user refreshes a page protected by permissions
+- **THEN** the router receives the correct permissions instantly via the Auth Context and stays on the requested route.
 
 ### Requirement: Granular API Authorization
 The system SHALL authorize API requests based on granular permissions rather than role checks.

@@ -1,7 +1,7 @@
 # branch-management Specification
 
 ## Purpose
-TBD - created by archiving change crm-advanced-operations. Update Purpose after archive.
+Defines the capabilities and requirements for managing regional branches and branch-based data filtering.
 ## Requirements
 ### Requirement: Branch Entity Creation
 The system SHALL support managing multiple Branches (e.g., Kochi, Kottayam) via a dedicated database model.

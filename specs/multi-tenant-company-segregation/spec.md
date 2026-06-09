@@ -1,7 +1,7 @@
 # multi-tenant-company-segregation Specification
 
 ## Purpose
-TBD - created by archiving change multi-company-segregation. Update Purpose after archive.
+Defines the capabilities and requirements for multi-tenant company segregation across the application, ensuring that queries default to the user's native company and cross-company access is appropriately restricted or granted.
 ## Requirements
 ### Requirement: Backend API Company Filtering
 The system SHALL filter all core resource queries (Tasks, Leads, Staff, Penalties, Candidates, Students, Reports) by the requested company.
