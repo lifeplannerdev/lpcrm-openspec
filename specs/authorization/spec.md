@@ -36,7 +36,7 @@ The frontend SHALL provide a generic wrapper component `<Can>` that conditionall
 - **THEN** the children of `<Can>` are NOT rendered
 
 ### Requirement: Hybrid Permission Storage and Payload Generation
-The system SHALL support both role-based access control via a many-to-many `db_roles` relationship to a `Role` model, and user-specific custom permissions via a `permissions` JSON field.
+The system SHALL support both role-based access control via a many-to-many `db_roles` relationship to a `Role` model, and user-specific custom permissions via a `permissions` JSON field. The legacy string-based `role` field on the `User` model is deprecated and completely removed; it MUST NOT be used for access control, serialization, or frontend display logic. The frontend MUST rely on `role_names` (array of strings) or `db_roles` (array of IDs).
 The backend SHALL calculate a consolidated permission payload for a user based on their assigned DB roles and directly assigned JSON permissions, returning a structured dictionary mapping resources to allowed actions (e.g., `{"leads": ["read", "create"]}`).
 
 #### Scenario: User performs an action restricted to specific roles
