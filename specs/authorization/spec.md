@@ -59,15 +59,15 @@ The permissions resolution context in the frontend SHALL immediately provide val
 - **THEN** the router receives the correct permissions instantly via the Auth Context and stays on the requested route.
 
 ### Requirement: Granular API Authorization
-The system SHALL authorize API requests based on granular permissions rather than role checks.
+The system SHALL authorize API requests using method-aware, granular `resource:action` permissions (e.g., `staff:read_any`, `penalties:edit_tenant`) rather than legacy role checks or flat string matching.
 
 #### Scenario: Authorized API access
-- **WHEN** a user requests an API endpoint requiring `manage_fees`
-- **THEN** the system grants access if `manage_fees` is present in the user's permissions array
+- **WHEN** a user requests a `POST` API endpoint for penalties requiring `penalties:create`
+- **THEN** the system grants access if `penalties:create` is present in the user's evaluated `db_roles` payload via `has_dynamic_permission`
 
 #### Scenario: Unauthorized API access
-- **WHEN** a trainer without `manage_fees` requests a fee update endpoint
-- **THEN** the system rejects the request even if the trainer can view the page in read-only mode
+- **WHEN** a trainer without `penalties:edit_any` requests a `PUT` endpoint for penalties
+- **THEN** the system rejects the request even if the trainer has `penalties:read_any` to view the page
 
 ### Requirement: Company and Domain Access Permissions
 The permission system SHALL support company-level access control and domain-specific access for students, attendance, and fees.
@@ -80,13 +80,13 @@ The permission system SHALL support company-level access control and domain-spec
 - **WHEN** creating or migrating roles based on `permission_templates.py`
 - **THEN** accounting roles are seeded with fee-management permissions, trainers are seeded with attendance and read-only fee permissions, and admin-style roles retain cross-company access
 
-### Requirement: Student, Finance, and Credentials Permission Vocabulary
-The system SHALL recognize student, attendance, finance, and credentials permission strings used by the CRM UI and backend authorization layer.
+### Requirement: Dynamic Permission Vocabulary
+The system SHALL recognize standard `resource:action` permission strings used by both the CRM UI and the backend dynamic permission classes (e.g., `HasPenaltyPermission`, `HasStaffPermission`).
 
-#### Scenario: New permission string is validated
-- **WHEN** the system evaluates `view_students`, `mark_attendance`, `view_fees`, `manage_fees`, `view_credentials`, or `manage_credentials`
-- **THEN** the permission engine accepts those strings as valid permissions
+#### Scenario: Read permissions are evaluated
+- **WHEN** the system evaluates a `GET` request requiring `staff:read_any`, `attendance:read_any`, or `candidates:read_any`
+- **THEN** the permission engine accepts those strings as valid read permissions
 
-#### Scenario: Expanded finance permissions are evaluated
-- **WHEN** the system evaluates `restructure_fees`, `record_partial_payment`, `issue_fee_notice`, or `view_fee_reports`
-- **THEN** the permission engine accepts those strings as valid permissions
+#### Scenario: Write/Manage permissions are evaluated
+- **WHEN** the system evaluates a `POST`, `PUT`, or `DELETE` request requiring `penalties:edit_any`, `attendance:create_any`, or `candidates:delete_any`
+- **THEN** the permission engine strictly enforces write access based on those specific action strings
