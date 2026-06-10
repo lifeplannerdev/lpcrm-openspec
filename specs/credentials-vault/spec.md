@@ -13,10 +13,11 @@ Credentials SHALL optionally be linked to a dynamic "Credential Category" for or
 
 ### Requirement: Granular Credential Sharing
 The system SHALL allow users to share a specific credential with individual users or entire roles.
+Visibility of a credential SHALL be strictly controlled by object-level sharing and query filtering, allowing any authenticated user to access the Vault and see only what is explicitly shared with them, without requiring global API permissions.
 
 #### Scenario: Credential shared with a role
 - **WHEN** a user creates a credential and selects the "Manager" role in the "Share With" dropdown
-- **THEN** any user with the Manager role can view and decrypt the credential
+- **THEN** any user with the Manager role can access the vault, view, and decrypt the credential
 - **AND** other users cannot see or decrypt the credential
 
 #### Scenario: Credential kept private
@@ -52,6 +53,10 @@ The UI SHALL provide action buttons for users to interact with credentials based
 - **WHEN** the authorized user (creator or admin) clicks the "Edit" button on a credential card
 - **THEN** the system opens the Edit Modal populated with the credential's existing data, including shared users and roles
 - **AND** saving the modal updates the credential directly
+
+#### Scenario: Editing a credential without changing the password
+- **WHEN** the user leaves the password field blank during an edit to indicate they want to keep it unchanged
+- **THEN** the backend serializer strictly allows the empty string (`allow_blank=True`) to pass validation and safely preserves the existing password in the database
 
 #### Scenario: Deleting a credential
 - **WHEN** the authorized user (creator or admin) clicks the "Delete" button on a credential card

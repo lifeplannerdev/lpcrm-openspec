@@ -1,8 +1,6 @@
 ## Purpose
 Defines the capabilities for capturing, filtering, processing, and viewing CRM leads, including advanced interfaces like Kanban and Split-Pane views.
-
 ## Requirements
-
 ### Requirement: Extend Lead Model for Marketing
 The system SHALL extend the existing CRM Lead model to include marketing data fields.
 
@@ -40,16 +38,22 @@ The system SHALL process bulk lead uploads efficiently using bulk database opera
 - **AND** duplicate checks are performed optimally without O(N) database queries
 
 ### Requirement: Split-Pane Master-Detail View
-The Leads List page SHALL optionally render as a split-pane interface on desktop screens, displaying the list of leads on the left and a detailed preview panel on the right.
+The Leads List page SHALL optionally render as a split-pane interface on desktop screens, displaying the list of leads on the left and a detailed preview panel on the right. On mobile screens (under 1024px), it SHALL render as a full-screen slide-over drawer to preserve context without compromising usability. The system SHALL use nested routing to maintain state across reloads.
 
-#### Scenario: Selecting a lead
-- **WHEN** user clicks on a lead row in the main table
-- **THEN** a side panel slides in from the right containing the lead's core details and quick actions
-- **AND** the URL updates without forcing a full page reload
+#### Scenario: Selecting a lead on desktop
+- **WHEN** user clicks on a lead row in the main table on a desktop device
+- **THEN** the route updates to `/leads/:leadId` using nested routing
+- **AND** a side panel slides in from the right containing the lead's core details and quick actions, while the table width compresses to accommodate it
+
+#### Scenario: Selecting a lead on mobile
+- **WHEN** user clicks on a lead row in the main table on a mobile device
+- **THEN** the route updates to `/leads/:leadId` using nested routing
+- **AND** a full-screen slide-over drawer covers the view, retaining the list's scroll position underneath
 
 #### Scenario: Closing the preview
-- **WHEN** user clicks the 'X' button or presses Escape while the side panel is open
-- **THEN** the side panel collapses and returns focus to the main list
+- **WHEN** user clicks the 'X' button, the backdrop, or presses Escape
+- **THEN** the route updates to `/leads`
+- **AND** the side panel collapses and returns focus to the main list
 
 ### Requirement: Kanban View for Leads
 The system SHALL provide an alternate "Kanban" view for the Leads page, categorizing leads by their current status (e.g., Enquiry, Contacted, Qualified, Converted).
@@ -76,3 +80,4 @@ The timeline SHALL allow users to directly schedule follow-ups or add notes with
 #### Scenario: Adding a note to the timeline
 - **WHEN** user clicks "Add Note" within the timeline header
 - **THEN** an inline form appears allowing immediate submission of a new remark or follow-up
+

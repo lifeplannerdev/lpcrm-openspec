@@ -69,6 +69,10 @@ The system SHALL authorize API requests using method-aware, granular `resource:a
 - **WHEN** a trainer without `penalties:edit_any` requests a `PUT` endpoint for penalties
 - **THEN** the system rejects the request even if the trainer has `penalties:read_any` to view the page
 
+#### Scenario: Credentials write access via dynamic permissions
+- **WHEN** a user attempts to create or delete a credential
+- **THEN** the system grants access ONLY if `credentials:manage` is present in the user's evaluated `db_roles` payload via `has_dynamic_permission` (or if they are the creator of that specific credential where applicable)
+
 ### Requirement: Company and Domain Access Permissions
 The permission system SHALL support company-level access control and domain-specific access for students, attendance, and fees.
 
