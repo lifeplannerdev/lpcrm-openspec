@@ -242,3 +242,18 @@ The frontend SHALL implement memoization strategies to prevent unnecessary compo
 - **THEN** only the affected components re-render, preserving the performance and responsiveness of the rest of the page.
 
 
+# #   A D D E D   R e q u i r e m e n t s  
+  
+ # # #   R e q u i r e m e n t :   P r e m i u m   F r o n t e n d   M o d a l s  
+ T h e   s y s t e m   S H A L L   d i s p l a y   m o d a l s   a n d   p o p u p s   u s i n g   a   b o u n d e d ,   i n t e r n a l l y - s c r o l l a b l e   s t r u c t u r e   t o   p r e v e n t   c o n t e n t   f r o m   h i d i n g   b e n e a t h   s t i c k y   h e a d e r s .  
+ -   M o d a l s   M U S T   N O T   r e l y   o n   s c r o l l i n g   t h e   b a c k g r o u n d   o v e r l a y   t o   v i e w   c o n t e n t .  
+ -   M o d a l s   M U S T   e n f o r c e   a   m a x i m u m   h e i g h t   ( e . g .   ` 9 0 v h ` )   r e l a t i v e   t o   t h e   v i e w p o r t .  
+ -   M o d a l s   M U S T   h a v e   a   f i x e d   h e a d e r   a n d   f i x e d   f o o t e r .  
+ -   T h e   m o d a l   f o r m   b o d y   M U S T   s c r o l l   i n d e p e n d e n t l y   w i t h i n   t h e   m o d a l   c o n t a i n e r .  
+  
+ # # # #   S c e n a r i o :   U s e r   v i e w s   a   t a l l   f o r m   i n   a   m o d a l  
+ -   * * W H E N * *   a   u s e r   o p e n s   a   m o d a l   c o n t a i n i n g   a   f o r m   t a l l e r   t h a n   t h e   s c r e e n  
+ -   * * T H E N * *   t h e   m o d a l   c o n t a i n e r   s t a y s   e n t i r e l y   w i t h i n   t h e   s c r e e n   b o u n d s  
+ -   * * T H E N * *   t h e   m o d a l   b o d y   a r e a   d i s p l a y s   a n   i n t e r n a l   s c r o l l b a r  
+ -   * * T H E N * *   t h e   m o d a l   h e a d e r   ( t i t l e )   a n d   f o o t e r   ( s a v e / c a n c e l   b u t t o n s )   r e m a i n   f i x e d   a n d   v i s i b l e   a t   a l l   t i m e s  
+ 
